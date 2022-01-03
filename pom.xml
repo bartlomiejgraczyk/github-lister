@@ -14,10 +14,10 @@
             <email>bgraczyk.mail@gmail.com</email>
         </developer>
     </developers>
-    
-    
+
+
     <properties>
-        
+
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
@@ -28,19 +28,47 @@
         <mave.build.timestamp.format>dd-MM-yyyy_HH:mm:ss</mave.build.timestamp.format>
 
         <spring-boot.version>2.6.2</spring-boot.version>
+        <spring-cloud.version>2021.0.0</spring-cloud.version>
 
         <maven.surefire.version>3.0.0-M5</maven.surefire.version>
-        
+
+        <lombok.version>1.18.22</lombok.version>
+
+        <guava.version>31.0.1-jre</guava.version>
+
     </properties>
-    
-    
+
+
     <dependencies>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -55,10 +83,18 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-    
+
     <build>
         <pluginManagement>
             <plugins>

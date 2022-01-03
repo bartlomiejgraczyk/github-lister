@@ -1,0 +1,7 @@
+app:
+    client:
+        read-timeout-seconds: 60
+
+github:
+    base-api-url: https://api.github.com
+    user-repos-resource-uri: /users/%s/repos
