@@ -1,6 +1,23 @@
+security:
+    basic:
+        enable: false
+
+management:
+    security:
+        enabled: false
+
 app:
     client:
         read-timeout-seconds: 60
+
+    title: GitHub Lister API
+    description: GitHub repository listing application.
+    version: 0.0.1
+
+    developer:
+        name: Bartłomiej Graczyk
+        url: https://github.com/bartlomiejgraczyk
+        email: bartlomiej.graczyk@gmail.com
 
 github:
     base-api-url: https://api.github.com

@@ -2,4 +2,4 @@ spring:
     application:
         name: github-lister-service
     profiles:
-        active: dev
+        active: dev, swagger

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import pl.bgraczyk.githublister.client.abstraction.BaseRestClient;
 import pl.bgraczyk.githublister.client.abstraction.GitHubRestClient;
 import pl.bgraczyk.githublister.client.exception.GitHubResponseErrorHandler;
 import pl.bgraczyk.githublister.client.exception.GitHubResponseException;
@@ -21,20 +22,21 @@ import pl.bgraczyk.githublister.dto.RepositoryDTO;
 
 @Slf4j
 @Service
-public class GitHubRestClientImpl implements GitHubRestClient {
+public class GitHubRestClientImpl extends BaseRestClient implements GitHubRestClient {
 
     private static final int DEFAULT_PAGE = 0;
     private static final int DEFAULT_SIZE = 10;
     private static final int MAX_SIZE = 1000;
 
     private final GitHubProperties gitHubProperties;
-    private final RestTemplate restTemplate;
 
     @Autowired
-    public GitHubRestClientImpl(GitHubProperties gitHubProperties, RestTemplate restTemplate) {
+    public GitHubRestClientImpl(GitHubProperties gitHubProperties,
+                                RestTemplate restTemplate) {
+        super(restTemplate);
         this.gitHubProperties = gitHubProperties;
-        this.restTemplate = restTemplate;
-        this.restTemplate.setErrorHandler(new GitHubResponseErrorHandler());
+        errorHandler(new GitHubResponseErrorHandler());
+        defaultUri(gitHubProperties.getBaseApiUrl());
     }
 
     @Override
@@ -43,7 +45,7 @@ public class GitHubRestClientImpl implements GitHubRestClient {
         HttpEntity<String> entity = new HttpEntity<>(getHttpHeaders());
 
         try {
-            ResponseEntity<RepositoryDTO> response = restTemplate.exchange(url, HttpMethod.GET, entity, RepositoryDTO.class);
+            ResponseEntity<RepositoryDTO[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, RepositoryDTO[].class);
             return Sets.newHashSet(response.getBody());
         } catch (GitHubResponseException e) {
             String errorMsg = String.format("Error during retrieving repositories for user %s, reason: %s, status code: %s", username, e.getLocalizedMessage(), e.getCode());
@@ -58,7 +60,7 @@ public class GitHubRestClientImpl implements GitHubRestClient {
 
     private HttpHeaders getHttpHeaders() {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        httpHeaders.setAccept(Collections.singletonList(MediaType.parseMediaType("application/vnd.github.v3+json")));
         return httpHeaders;
     }
 }

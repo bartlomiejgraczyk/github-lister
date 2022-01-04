@@ -20,9 +20,23 @@ public class ApplicationProperties {
 
     private final Client client = new Client();
 
+    private String title;
+    private String description;
+    private String version;
+
     @Data
     @NoArgsConstructor
     public static class Client {
         private Integer readTimeoutSeconds;
+    }
+
+    private final Developer developer = new Developer();
+
+    @Data
+    @NoArgsConstructor
+    public static class Developer {
+        private String name;
+        private String url;
+        private String email;
     }
 }
