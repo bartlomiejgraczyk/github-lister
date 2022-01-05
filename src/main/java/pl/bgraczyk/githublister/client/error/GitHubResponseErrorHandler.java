@@ -1,4 +1,4 @@
-package pl.bgraczyk.githublister.client.exception;
+package pl.bgraczyk.githublister.client.error;
 
 import java.io.IOException;
 import org.springframework.http.client.ClientHttpResponse;

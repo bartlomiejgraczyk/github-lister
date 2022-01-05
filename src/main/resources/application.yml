@@ -1,11 +1,3 @@
-security:
-    basic:
-        enable: false
-
-management:
-    security:
-        enabled: false
-
 app:
     client:
         read-timeout-seconds: 60

@@ -1,4 +1,4 @@
-package pl.bgraczyk.githublister.client.exception;
+package pl.bgraczyk.githublister.client.error.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

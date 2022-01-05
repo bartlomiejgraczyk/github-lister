@@ -1,5 +1,6 @@
 package pl.bgraczyk.githublister.client.abstraction;
 
+import java.util.Map;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
