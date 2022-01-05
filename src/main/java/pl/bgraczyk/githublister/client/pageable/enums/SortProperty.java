@@ -1,4 +1,4 @@
-package pl.bgraczyk.githublister.client.pageable;
+package pl.bgraczyk.githublister.client.pageable.enums;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

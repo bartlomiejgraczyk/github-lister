@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import pl.bgraczyk.githublister.client.pageable.enums.SortDirection;
+import pl.bgraczyk.githublister.client.pageable.enums.SortProperty;
+import pl.bgraczyk.githublister.client.pageable.enums.SortType;
 
 import static java.util.Objects.isNull;
 

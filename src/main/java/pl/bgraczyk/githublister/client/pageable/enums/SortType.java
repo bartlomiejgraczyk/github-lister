@@ -1,25 +1,25 @@
-package pl.bgraczyk.githublister.client.pageable;
+package pl.bgraczyk.githublister.client.pageable.enums;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import io.swagger.annotations.ApiModel;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel
-public enum SortDirection {
+public enum SortType {
 
-    ASC("asc"),
-    DESC("desc");
+    ALL("all"),
+    OWNER("owner"),
+    MEMBER("member");
 
     private final String text;
 
     public static String valuesAsString() {
         return Stream.of(values())
-            .map(SortDirection::toString)
+            .map(SortType::toString)
             .collect(Collectors.joining(", "));
     }
 }
