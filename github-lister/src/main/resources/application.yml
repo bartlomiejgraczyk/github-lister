@@ -1,0 +1,13 @@
+app:
+
+    title: GitHub Lister API
+    description: GitHub user repositories and its statistics listing application.
+    version: 0.0.1
+
+    developer:
+        name: Bartłomiej Graczyk
+        url: https://github.com/bartlomiejgraczyk
+        email: bartlomiej.graczyk@gmail.com
+
+github:
+    access-token: ${GITHUB_LISTER_CLIENT_ACCESS_TOKEN}
