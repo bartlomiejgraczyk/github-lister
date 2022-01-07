@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.bgraczyk</groupId>
-    <artifactId>github-lister</artifactId>
-    <version>0.1.0</version>
-
+    <artifactId>github-lister-discovery-server</artifactId>
+    <version>0.0.1</version>
+    
 
     <developers>
         <developer>
@@ -14,7 +14,7 @@
             <email>bgraczyk.mail@gmail.com</email>
         </developer>
     </developers>
-
+    
 
     <properties>
 
@@ -30,27 +30,24 @@
         <spring-boot.version>2.5.2</spring-boot.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
 
-        <swagger.version>3.0.0</swagger.version>
-
-        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
-
-        <lombok.version>1.18.22</lombok.version>
-
-        <guava.version>31.0.1-jre</guava.version>
-
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb-core.version>2.3.0.1</jaxb-core.version>
+        <jaxb-impl.version>2.3.1</jaxb-impl.version>
+        <jaxb-runtime.version>2.3.1</jaxb-runtime.version>
+        <javax-activation.version>1.1.1</javax-activation.version>
     </properties>
 
 
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
         <dependency>
@@ -59,32 +56,47 @@
         </dependency>
 
         <dependency>
-            <groupId>org.kohsuke</groupId>
-            <artifactId>github-api</artifactId>
-            <version>1.301</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${swagger.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb-impl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${jaxb-runtime.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>${javax-activation.version}</version>
         </dependency>
 
     </dependencies>
-
+    
 
     <dependencyManagement>
         <dependencies>
@@ -107,24 +119,5 @@
 
         </dependencies>
     </dependencyManagement>
-
-
-    <build>
-        <pluginManagement>
-            <plugins>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven.surefire.version}</version>
-                    <configuration>
-                        <parallel>all</parallel>
-                        <threadCount>10</threadCount>
-                    </configuration>
-                </plugin>
-
-            </plugins>
-        </pluginManagement>
-    </build>
 
 </project>
