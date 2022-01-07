@@ -1,0 +1,30 @@
+spring:
+    application:
+        name: github-lister-config-server
+    profiles:
+        active: dev
+
+
+    cloud:
+        config:
+            uri: http://localhost:8888
+            enabled: true
+
+            server:
+                bootstrap: true
+                git:
+                    uri: https://github.com/bartlomiejgraczyk/github-lister-config-repo
+                    search-paths:
+                        - '{application}'
+                    clone-on-start: true
+                    ignore-local-ssh-settings: true
+                    skipSslValidation: true
+                    username: ${GH_LISTER_CONFIG_REPO_USERNAME}
+                    password: ${GH_LISTER_CONFIG_REPO_ACCESS_TOKEN}
+                    refreshRate: 60
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"

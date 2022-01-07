@@ -1,5 +1,6 @@
 package pl.bgraczyk.githublister.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LanguageStatsDTO implements Comparable<LanguageStatsDTO> {
 
-    String language;
-    Long totalBytes;
+    private String language;
+
+    @JsonProperty("total-bytes")
+    private Long totalBytes;
 
     @Override
     public int compareTo(LanguageStatsDTO o) {

@@ -1,5 +1,12 @@
+server:
+    port: 8080
 spring:
     application:
-        name: github-lister-service
+        name: github-lister
     profiles:
         active: dev, swagger
+
+    cloud:
+        config:
+            uri: http://localhost:8888
+            enabled: true
