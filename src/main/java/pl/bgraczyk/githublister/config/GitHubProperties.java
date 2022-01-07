@@ -17,10 +17,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "github")
 public class GitHubProperties {
 
-    private String baseApiUrl;
-    private String userReposResourceUri;
-
-    public String getFullUserReposResourceApiUrl() {
-        return getBaseApiUrl() + getUserReposResourceUri();
-    }
+    private String accessToken;
 }

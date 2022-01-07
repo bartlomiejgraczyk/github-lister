@@ -18,18 +18,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app")
 public class ApplicationProperties {
 
-    private final Client client = new Client();
-
     private String title;
     private String description;
     private String version;
-
-    @Data
-    @NoArgsConstructor
-    public static class Client {
-        private Integer readTimeoutSeconds;
-    }
-
     private final Developer developer = new Developer();
 
     @Data

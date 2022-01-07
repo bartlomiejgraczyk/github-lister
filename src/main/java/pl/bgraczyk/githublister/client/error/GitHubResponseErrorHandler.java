@@ -10,7 +10,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.UnknownHttpStatusCodeException;
-import pl.bgraczyk.githublister.client.error.exception.GitHubResponseException;
+import pl.bgraczyk.githublister.client.error.exception.GitHubResponseClientException;
 
 public class GitHubResponseErrorHandler extends DefaultResponseErrorHandler implements ResponseErrorHandler {
 
@@ -28,7 +28,7 @@ public class GitHubResponseErrorHandler extends DefaultResponseErrorHandler impl
         throw getResponseError(response, status);
     }
 
-    private GitHubResponseException getResponseError(ClientHttpResponse response, HttpStatus status) throws JsonProcessingException {
+    private GitHubResponseClientException getResponseError(ClientHttpResponse response, HttpStatus status) throws JsonProcessingException {
         String jsonString = new String(getResponseBody(response), StandardCharsets.UTF_8);
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -37,10 +37,10 @@ public class GitHubResponseErrorHandler extends DefaultResponseErrorHandler impl
         try {
             jsonNode = objectMapper.readTree(jsonString);
         } catch (JsonProcessingException e) {
-            return new GitHubResponseException(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new GitHubResponseClientException(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         String message = objectMapper.writeValueAsString(jsonNode.get("message"));
-        return new GitHubResponseException(message, status);
+        return new GitHubResponseClientException(message, status);
     }
 }

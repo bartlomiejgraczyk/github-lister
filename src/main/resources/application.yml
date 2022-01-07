@@ -1,9 +1,7 @@
 app:
-    client:
-        read-timeout-seconds: 60
 
     title: GitHub Lister API
-    description: GitHub repository listing application.
+    description: GitHub user repositories and its statistics listing application.
     version: 0.0.1
 
     developer:
@@ -12,5 +10,4 @@ app:
         email: bartlomiej.graczyk@gmail.com
 
 github:
-    base-api-url: https://api.github.com
-    user-repos-resource-uri: /users/%s/repos
+    access-token: ${GITHUB_LISTER_CLIENT_ACCESS_TOKEN}

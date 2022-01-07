@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RepositoryDTO {
+public class RepositoryDTO implements Comparable<RepositoryDTO> {
 
     private String name;
 
@@ -29,5 +29,10 @@ public class RepositoryDTO {
     @Override
     public int hashCode() {
         return Objects.hashCode(getName());
+    }
+
+    @Override
+    public int compareTo(RepositoryDTO o) {
+        return this.getStars().compareTo(o.getStars());
     }
 }
