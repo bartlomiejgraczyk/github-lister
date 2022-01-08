@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.bgraczyk.githublister.api.controller.abstraction.UserController;
 import pl.bgraczyk.githublister.dto.LanguageStatsDTO;
 import pl.bgraczyk.githublister.dto.RepositoryDTO;
 import pl.bgraczyk.githublister.dto.StarStatsDTO;
@@ -16,29 +17,31 @@ import pl.bgraczyk.githublister.service.abstraction.GitHubIntegrationService;
 
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "repositories", tags = "repositories")
-public class UserController {
+public class UserControllerImpl implements UserController {
 
     private final GitHubIntegrationService gitHubIntegrationService;
 
     @Autowired
-    public UserController(GitHubIntegrationService gitHubIntegrationService) {
+    public UserControllerImpl(GitHubIntegrationService gitHubIntegrationService) {
         this.gitHubIntegrationService = gitHubIntegrationService;
     }
 
     @GetMapping(value = "/user/{username}/repositories")
     public ResponseEntity<List<RepositoryDTO>> getRepositories(@PathVariable(value = "username") String username) {
+
         return ResponseEntity.ok(gitHubIntegrationService.getUserRepositoriesSorted(username));
     }
 
     @GetMapping(value = "/user/{username}/stars")
     public ResponseEntity<StarStatsDTO> getStargazersCount(@PathVariable(value = "username") String username) {
+
         return ResponseEntity.ok(gitHubIntegrationService.getUserRepositoriesStarsCount(username));
     }
 
     @GetMapping(value = "/user/{username}/languages")
     public ResponseEntity<List<LanguageStatsDTO>> getLanguages(@PathVariable(value = "username") String username,
                                                                @RequestParam(value = "count", required = false, defaultValue = "10") int count) {
+
         return ResponseEntity.ok(gitHubIntegrationService.getUserMostlyUsedLanguages(username, count));
     }
 }

@@ -6,15 +6,16 @@
     <groupId>pl.bgraczyk</groupId>
     <artifactId>github-lister-discovery-server</artifactId>
     <version>0.0.1</version>
-    
+
 
     <developers>
         <developer>
             <name>Bartłomiej Graczyk</name>
+            <url>https://github.com/bartlomiejgraczyk</url>
             <email>bgraczyk.mail@gmail.com</email>
         </developer>
     </developers>
-    
+
 
     <properties>
 
@@ -96,7 +97,7 @@
         </dependency>
 
     </dependencies>
-    
+
 
     <dependencyManagement>
         <dependencies>
