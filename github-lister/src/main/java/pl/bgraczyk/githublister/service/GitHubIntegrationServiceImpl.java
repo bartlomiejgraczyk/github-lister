@@ -53,6 +53,6 @@ public class GitHubIntegrationServiceImpl implements GitHubIntegrationService {
             .flatMap(map -> map.entrySet().stream())
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
-        return RepositoryLanguagesMapper.aggregate(languages).subList(0, count);
+        return RepositoryLanguagesMapper.map(languages).subList(0, count);
     }
 }

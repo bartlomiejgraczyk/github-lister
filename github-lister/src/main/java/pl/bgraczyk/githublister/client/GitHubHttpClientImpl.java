@@ -51,7 +51,7 @@ public class GitHubHttpClientImpl implements GitHubHttpClient {
                 .listRepositories()
                 .toSet()
                 .stream()
-                .map(RepositoryLanguagesMapper::map)
+                .map(RepositoryLanguagesMapper::getLanguages)
                 .collect(Collectors.toList());
         } catch (GitHubResponseClientException e) {
             String errorMsg = String.format("Error during retrieving repositories languages for user %s, reason: %s, status code: %s", username, e.getLocalizedMessage(), e.getCode());
