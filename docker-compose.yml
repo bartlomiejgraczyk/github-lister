@@ -49,14 +49,16 @@ services:
         depends_on:
             - discovery-server
             - config-server
+        environment:
+            - GH_LISTER_CLIENT_ACCESS_TOKEN=${GH_LISTER_CLIENT_ACCESS_TOKEN}
     
     prometheus:
         container_name: prometheus
         image: prom/prometheus:v2.32.1
         networks:
             - github-lister-network
-        ports:
-            - "9090:9090"
+        expose:
+            - "9090"
         volumes:
             - ./metrics/prometheus.yml:/etc/prometheus/prometheus.yml
             - prometheus-data:/prometheus

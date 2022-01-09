@@ -9,12 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import pl.bgraczyk.githublister.client.abstraction.GitHubHttpClient;
 import pl.bgraczyk.githublister.client.abstraction.SessionManager;
 import pl.bgraczyk.githublister.client.error.exception.GitHubResponseClientException;
 import pl.bgraczyk.githublister.util.RepositoryLanguagesMapper;
 
+@Lazy
 @Slf4j
 @Service
 public class GitHubHttpClientImpl implements GitHubHttpClient {

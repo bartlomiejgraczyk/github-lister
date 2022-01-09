@@ -27,10 +27,17 @@ public class GitHubSessionManager implements SessionManager<GitHub> {
     @Override
     public GitHub create() {
         try {
-            return new GitHubBuilder()
+            GitHub gitHub = new GitHubBuilder()
                 .withOAuthToken(gitHubProperties.getAccessToken())
                 .withRateLimitHandler(new GitHubClientRateLimitHandler())
                 .build();
+
+            if (!gitHub.isCredentialValid()) {
+                log.info("Given GitHub credentials are invalid. Connecting anonymously...");
+                return connectAnonymously();
+            }
+
+            return gitHub;
         } catch (IOException e) {
             log.warn("Error during retrieving GitHub connection, reason: {}", e.getLocalizedMessage());
             return connectAnonymously();

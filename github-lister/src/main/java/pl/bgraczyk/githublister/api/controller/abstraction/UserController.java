@@ -13,7 +13,6 @@ import pl.bgraczyk.githublister.dto.StarStatsDTO;
 @Api(value = "repositories", tags = "repositories")
 public interface UserController {
 
-
     @GetMapping(value = "/user/{username}/repositories")
     ResponseEntity<List<RepositoryDTO>> getRepositories(@PathVariable(value = "username") String username);
 
