@@ -1,0 +1,115 @@
+version: '3.9'
+
+networks:
+    github-lister-network:
+        driver: bridge
+
+volumes:
+    prometheus-data:
+        driver: local
+    grafana-data:
+        driver: local
+
+services:
+    
+    config-server:
+        container_name: config-server
+        build:
+            context: github-lister-config-server
+            dockerfile: config-server.Dockerfile
+        ports:
+            - "8888:8888"
+        networks:
+            - github-lister-network
+        restart: always
+    
+    discovery-server:
+        container_name: discovery-server
+        build:
+            context: github-lister-discovery-server
+            dockerfile: discovery-server.Dockerfile
+        ports:
+            - "8761:8761"
+        networks:
+            - github-lister-network
+        restart: on-failure
+        depends_on:
+            - config-server
+    
+    core:
+        container_name: core
+        build:
+            context: github-lister
+            dockerfile: core.Dockerfile
+        ports:
+            - "8080:8080"
+        networks:
+            - github-lister-network
+        restart: on-failure
+        depends_on:
+            - discovery-server
+            - config-server
+    
+    prometheus:
+        container_name: prometheus
+        image: prom/prometheus:v2.32.1
+        networks:
+            - github-lister-network
+        ports:
+            - "9090:9090"
+        volumes:
+            - ./metrics/prometheus.yml:/etc/prometheus/prometheus.yml
+            - prometheus-data:/prometheus
+        restart: unless-stopped
+        depends_on:
+            - core
+    
+    node-exporter:
+        container_name: node-exporter
+        image: prom/node-exporter:v1.3.1
+        networks:
+            - github-lister-network
+        ports:
+            - "9100:9100"
+        volumes:
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+        command:
+            - '--path.procfs=/host/proc'
+            - '--path.sysfs=/host/sys'
+            - --collector.filesystem.ignored-mount-points
+            - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+        restart: unless-stopped
+        depends_on:
+            - core
+    
+    
+    cadvisor:
+        container_name: cadvisor
+        image: google/cadvisor:v0.33.0
+        volumes:
+            - /var/run:/var/run:rw
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+        networks:
+            - github-lister-network
+        ports:
+            - "8081:8081"
+        restart: unless-stopped
+        depends_on:
+            - core
+    
+    grafana:
+        container_name: grafana
+        image: grafana/grafana:8.3.3
+        networks:
+            - github-lister-network
+        ports:
+            - "3000:3000"
+        volumes:
+            - grafana-data:/var/lib/grafana
+        restart: unless-stopped
+        depends_on:
+            - prometheus
+            - node-exporter
+            - cadvisor

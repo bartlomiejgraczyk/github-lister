@@ -1,4 +1,4 @@
-package pl.bgraczyk.githublister.service;
+package pl.bgraczyk.githublister.util;
 
 import java.io.IOException;
 import java.util.Collections;

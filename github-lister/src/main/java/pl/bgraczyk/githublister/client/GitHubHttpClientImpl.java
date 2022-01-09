@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import pl.bgraczyk.githublister.client.abstraction.GitHubHttpClient;
 import pl.bgraczyk.githublister.client.abstraction.SessionManager;
 import pl.bgraczyk.githublister.client.error.exception.GitHubResponseClientException;
-import pl.bgraczyk.githublister.service.RepositoryLanguagesMapper;
+import pl.bgraczyk.githublister.util.RepositoryLanguagesMapper;
 
 @Slf4j
 @Service

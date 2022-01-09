@@ -13,6 +13,8 @@ import pl.bgraczyk.githublister.dto.LanguageStatsDTO;
 import pl.bgraczyk.githublister.dto.RepositoryDTO;
 import pl.bgraczyk.githublister.dto.StarStatsDTO;
 import pl.bgraczyk.githublister.service.abstraction.GitHubIntegrationService;
+import pl.bgraczyk.githublister.util.GitHubRepositoryMapper;
+import pl.bgraczyk.githublister.util.RepositoryLanguagesMapper;
 
 @Slf4j
 @Service

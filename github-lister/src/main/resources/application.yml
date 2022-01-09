@@ -1,5 +1,4 @@
 app:
-
     developer:
         name: '@developer.name@'
         url: '@developer.url@'
@@ -8,3 +7,15 @@ app:
     title: '@project.name@'
     description: '@project.description@'
     version: '@project.version@'
+
+info:
+    author: '@developer.name@'
+    mail: '@developer.email@'
+    java-vendor: '@java.specification.vendor@'
+
+    java:
+        version: '@java.version@'
+
+    app:
+        name: '@project.name@'
+        version: '@project.version@'

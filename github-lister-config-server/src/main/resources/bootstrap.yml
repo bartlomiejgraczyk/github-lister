@@ -7,7 +7,7 @@ spring:
 
     cloud:
         config:
-            uri: http://localhost:8888
+            uri: http://config-server:8888
             enabled: true
 
             server:
@@ -19,12 +19,4 @@ spring:
                     clone-on-start: true
                     ignore-local-ssh-settings: true
                     skipSslValidation: true
-                    username: ${GH_LISTER_CONFIG_REPO_USERNAME}
-                    password: ${GH_LISTER_CONFIG_REPO_ACCESS_TOKEN}
                     refreshRate: 60
-
-management:
-    endpoints:
-        web:
-            exposure:
-                include: "*"

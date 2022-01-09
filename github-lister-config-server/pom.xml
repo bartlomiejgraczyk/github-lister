@@ -6,9 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.bgraczyk</groupId>
     <artifactId>github-lister-config-server</artifactId>
-    <version>0.0.1</version>
-
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
     
+
     <developers>
         <developer>
             <name>Bartłomiej Graczyk</name>
@@ -28,7 +29,7 @@
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <mave.build.timestamp.format>dd-MM-yyyy_HH:mm:ss</mave.build.timestamp.format>
-
+        
         <spring-boot.version>2.5.2</spring-boot.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
 
@@ -97,5 +98,45 @@
         </dependencies>
     </dependencyManagement>
 
+    
+    <build>
+        
+        <finalName>github-lister-config-server</finalName>
+        
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                
+                <configuration>
+                    <mainClass>pl.bgraczyk.githublister.GitHubListerConfigServerApplication</mainClass>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+        </plugins>
+        
+        
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+                
+            </plugins>
+        </pluginManagement>
+        
+    </build>
     
 </project>

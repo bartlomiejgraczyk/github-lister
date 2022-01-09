@@ -1,4 +1,4 @@
-package pl.bgraczyk.githublister.service;
+package pl.bgraczyk.githublister.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

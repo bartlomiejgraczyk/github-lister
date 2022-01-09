@@ -1,7 +1,6 @@
 package pl.bgraczyk.githublister.api.controller;
 
 import java.util.List;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,19 +25,22 @@ public class UserControllerImpl implements UserController {
         this.gitHubIntegrationService = gitHubIntegrationService;
     }
 
-    @GetMapping(value = "/user/{username}/repositories")
+    @Override
+    @GetMapping(value = "/users/{username}/repositories")
     public ResponseEntity<List<RepositoryDTO>> getRepositories(@PathVariable(value = "username") String username) {
 
         return ResponseEntity.ok(gitHubIntegrationService.getUserRepositoriesSorted(username));
     }
 
-    @GetMapping(value = "/user/{username}/stars")
+    @Override
+    @GetMapping(value = "/users/{username}/stars")
     public ResponseEntity<StarStatsDTO> getStargazersCount(@PathVariable(value = "username") String username) {
 
         return ResponseEntity.ok(gitHubIntegrationService.getUserRepositoriesStarsCount(username));
     }
 
-    @GetMapping(value = "/user/{username}/languages")
+    @Override
+    @GetMapping(value = "/users/{username}/languages")
     public ResponseEntity<List<LanguageStatsDTO>> getLanguages(@PathVariable(value = "username") String username,
                                                                @RequestParam(value = "count", required = false, defaultValue = "10") int count) {
 
