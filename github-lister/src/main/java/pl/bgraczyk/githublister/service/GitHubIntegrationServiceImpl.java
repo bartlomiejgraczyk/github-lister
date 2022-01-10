@@ -16,7 +16,6 @@ import pl.bgraczyk.githublister.service.abstraction.GitHubIntegrationService;
 import pl.bgraczyk.githublister.util.GitHubRepositoryMapper;
 import pl.bgraczyk.githublister.util.RepositoryLanguagesMapper;
 
-@Slf4j
 @Service
 public class GitHubIntegrationServiceImpl implements GitHubIntegrationService {
 
@@ -53,6 +52,8 @@ public class GitHubIntegrationServiceImpl implements GitHubIntegrationService {
             .flatMap(map -> map.entrySet().stream())
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::sum));
 
-        return RepositoryLanguagesMapper.map(languages).subList(0, count);
+        List<LanguageStatsDTO> languagesDTO = RepositoryLanguagesMapper.map(languages);
+
+        return languagesDTO.size() >= count ? languagesDTO.subList(0, count) : languagesDTO;
     }
 }

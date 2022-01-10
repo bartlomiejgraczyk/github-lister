@@ -1,6 +1,5 @@
 package pl.bgraczyk.githublister.client;
 
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kohsuke.github.GitHub;
@@ -22,7 +21,7 @@ class GitHubSessionManagerIntTest {
     private GitHubSessionManager gitHubSessionManager;
 
     @Test
-    void should_connect_anonymously_when_token_is_invalid() throws IOException {
+    void should_connect_anonymously_when_token_is_invalid() {
         String invalidToken = "invalid-access-token";
         when(gitHubProperties.getAccessToken()).thenReturn(invalidToken);
 
