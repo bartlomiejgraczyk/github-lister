@@ -93,5 +93,4 @@ class RepositoryLanguagesMapperTest {
 
         assertTrue(Ordering.natural().reverse().isOrdered(mappedLanguages));
     }
-
 }
