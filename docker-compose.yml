@@ -85,7 +85,6 @@ services:
         depends_on:
             - core
     
-    
     cadvisor:
         container_name: cadvisor
         image: google/cadvisor:v0.33.0
